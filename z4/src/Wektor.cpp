@@ -1,5 +1,4 @@
 #include "Wektor.hh"
-using namespace std;
 
 /*
  *  Tutaj nalezy zdefiniowac odpowiednie metody
@@ -7,20 +6,7 @@ using namespace std;
  *  niz dwie linijki.
  *  Mniejsze metody mozna definiwac w ciele klasy.
  */
-/*
- * Metoda klasy wektor obliczajaca 
- * dlugosc danego wektora.
- */
-template <typename T, int Wymiar> 
-T Wektor<T,Wymiar>::dlugosc() const{
-  T Wynik;
-  T tmp;
-  for( int i = 0; i < Wymiar; i++){
-  tmp += this->dane[i]*this->dane[i];
-}
-Wynik = sqrt(tmp);
-return Wynik;
-}
+
   
 /*
  * Metoda przeciazajaca operacje
@@ -28,7 +14,8 @@ return Wynik;
  */
 template <typename T, int Wymiar> 
   T Wektor<T,Wymiar>::operator * (const Wektor<T,Wymiar> &W2) const{
-      T Wynik = 0;
+      T Wynik;
+      Wynik = 0;
 for(int i = 0; i < Wymiar; i++)
     Wynik += this->dane[i] * W2.dane[i];
 return Wynik;
@@ -40,7 +27,7 @@ return Wynik;
  */
 template <typename T, int Wymiar> 
   Wektor<T,Wymiar> Wektor<T,Wymiar>::operator + (const Wektor<T,Wymiar> &W2) const{
-      Wektor<T,Wymiar> Wynik;
+      Wektor<T,Wymiar> Wynik = 0;
 for(int i = 0; i < Wymiar; i++)
     Wynik.dane[i] = this->dane[i] + W2.dane[i];
 return Wynik;
@@ -52,7 +39,7 @@ return Wynik;
  */
 template <typename T, int Wymiar> 
   Wektor<T,Wymiar> Wektor<T,Wymiar>::operator - (const Wektor<T,Wymiar> &W2) const{
-      Wektor<T,Wymiar> Wynik;
+      Wektor<T,Wymiar> Wynik = 0;
 for(int i = 0; i < Wymiar; i++)
     Wynik.dane[i] = this->dane[i] - W2.dane[i];
 return Wynik;
@@ -92,8 +79,8 @@ template <typename T, int Wymiar>
  * przesuniecia bitowego w prawo.
  */
 template <typename T, int Wymiar> 
-  std::istream& operator >> (std::istream &Strm, Wektor < T, Wymiar>  &W){
-      for(int i = 0; i < ROZMIAR; i++){
+  istream& operator >> (istream &Strm, Wektor < T, Wymiar>  &W){
+      for(int i = 0; i < Wymiar; i++){
         Strm>>W[i];
       }
 
@@ -105,8 +92,8 @@ template <typename T, int Wymiar>
  * przesuniecia bitowego w lewo.
  */
 template <typename T, int Wymiar> 
-  std::ostream& operator << (std::ostream &Strm, const Wektor < T, Wymiar>  &W){
-      for(int i = 0; i < ROZMIAR; i++){
+  ostream& operator << (ostream &Strm, const Wektor < T, Wymiar>  &W){
+      for(int i = 0; i < Wymiar; i++){
         Strm << W[i];
         Strm << ' ';
         }

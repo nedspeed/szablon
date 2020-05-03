@@ -17,15 +17,15 @@ using std::ostream;
 struct  LZespolona {
   double   re;    /*! Pole repezentuje czesc rzeczywista. */
   double   im;    /*! Pole repezentuje czesc urojona. */
+  LZespolona & operator = (double Skl1);
 };
 
 
 /*
  * Dalej powinny pojawic sie zapowiedzi definicji przeciazen operatorow
  */
-
-
-LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2);
+LZespolona operator += (LZespolona & Skl1, LZespolona Skl2);
+LZespolona operator + (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona operator - (LZespolona Skl1, LZespolona Skl2);
 LZespolona operator * (LZespolona Skl1, LZespolona Skl2);
 LZespolona Sprzezenie(LZespolona Skl2);

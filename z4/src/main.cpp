@@ -1,14 +1,12 @@
 #include <iostream>
 #include "Wektor.hh"
-#include "LZespolona.hh"
-
-using namespace std;
-
 
 
 
 int main()
 {
-Wektor<double, ROZMIAR> WekTestowy;
+Wektor<double, 5> WekTestowy;
+cin>>WekTestowy;
+
 return 0;
 }

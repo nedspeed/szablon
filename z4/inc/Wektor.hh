@@ -3,7 +3,8 @@
 #include "rozmiar.h"
 #include <iostream>
 #include <cmath>
-
+#include "LZespolona.hh"
+using namespace std;
 /*
  *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
  *  i jakie ma glowne cechy.
@@ -18,9 +19,11 @@ T dane[Wymiar];
 //int wymiar;
 //double *dane;
   public:
-  Wektor<T, Wymiar>() = default;
+  Wektor<T, Wymiar>() {
+    for(int i; i < ROZMIAR; i++)
+    dane[i] = 0;
+  }
   Wektor<T, Wymiar>(T dane[Wymiar]); //konstruktor od kolekcji
-  T dlugosc() const;  //metoda obliczajca dlugosc wektora
   T operator *(const Wektor<T, Wymiar> &W2) const;  //przeciazenie mnozenia wektor razy wektor
   Wektor<T, Wymiar> operator + (const Wektor<T, Wymiar> &W2) const; //przeciazenie dodawania wektorow
   Wektor<T, Wymiar> operator - (const Wektor<T, Wymiar> &W2) const; //przeciazenie odejmowania wektorow
@@ -45,7 +48,7 @@ double b = Wc[2]; */
  * a za drugi argument bierze podana macierz.
  */
 template <typename T, int Wymiar> 
-std::istream& operator >> (std::istream &Strm, Wektor<T, Wymiar> &W);
+istream& operator >> (istream &Strm, Wektor<T, Wymiar> &W);
 
 /*
  * To przeciazenie trzeba opisac. Co ono robi. Jaki format
@@ -59,6 +62,6 @@ std::istream& operator >> (std::istream &Strm, Wektor<T, Wymiar> &W);
  * a za drugi argument bierze podana macierz.
  */
 template <typename T, int Wymiar> 
-std::ostream& operator << (std::ostream &Strm, const Wektor<T, Wymiar> &W);
+ostream& operator << (ostream &Strm, const Wektor<T, Wymiar> &W);
 
 #endif

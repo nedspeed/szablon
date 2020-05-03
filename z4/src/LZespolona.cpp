@@ -7,6 +7,16 @@ using std::cin;
 using std::showpos;
 using std::noshowpos;
 
+LZespolona & LZespolona::operator = (double Skl1){
+  this->im = 0;
+  this->re = Skl1;
+  return *this;
+}
+
+LZespolona operator += (LZespolona & Skl1, LZespolona Skl2){
+  Skl1 = Skl1 + Skl2;
+  return Skl1;
+}
 /*!
  * Realizuje dodanie dwoch liczb zespolonych.
  * Argumenty:
