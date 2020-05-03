@@ -1,12 +1,12 @@
 #include <iostream>
-#include "Wektor.hh"
-
+#include "UkladRownanLiniowych.hh"
 
 
 int main()
 {
-Wektor<double, 5> WekTestowy;
-cin>>WekTestowy;
 
+UkladRownanLiniowych<double, 5> UTest;
+cin >> UTest;
+cout << UTest;
 return 0;
 }

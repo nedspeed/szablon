@@ -27,7 +27,7 @@ return Wynik;
  */
 template <typename T, int Wymiar> 
   Wektor<T,Wymiar> Wektor<T,Wymiar>::operator + (const Wektor<T,Wymiar> &W2) const{
-      Wektor<T,Wymiar> Wynik = 0;
+      Wektor<T,Wymiar> Wynik;
 for(int i = 0; i < Wymiar; i++)
     Wynik.dane[i] = this->dane[i] + W2.dane[i];
 return Wynik;
@@ -39,7 +39,7 @@ return Wynik;
  */
 template <typename T, int Wymiar> 
   Wektor<T,Wymiar> Wektor<T,Wymiar>::operator - (const Wektor<T,Wymiar> &W2) const{
-      Wektor<T,Wymiar> Wynik = 0;
+      Wektor<T,Wymiar> Wynik;
 for(int i = 0; i < Wymiar; i++)
     Wynik.dane[i] = this->dane[i] - W2.dane[i];
 return Wynik;

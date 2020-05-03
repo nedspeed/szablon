@@ -15,9 +15,6 @@ class Wektor{
    *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
    */
 T dane[Wymiar];
-//int x,y,z;
-//int wymiar;
-//double *dane;
   public:
   Wektor<T, Wymiar>() {
     for(int i; i < ROZMIAR; i++)
@@ -30,12 +27,7 @@ T dane[Wymiar];
   const T & operator [] (int indeks) const; //przeciazenie operatora indeksowania dla wektora typu const
   T & operator [] (int indeks); //przeciazenie operatora indeksowania dla wektora dowolnego typu
 };
-/*Wektor W;
-W[2];
-const Wektor Wc;
-Wc.dlugosc();
-Wc[2]=2;
-double b = Wc[2]; */
+
 /*
  * To przeciazenie trzeba opisac. Co ono robi. Jaki format
  * danych akceptuje. Jakie jest znaczenie parametrow itd.

@@ -7,12 +7,20 @@ using std::cin;
 using std::showpos;
 using std::noshowpos;
 
+/*
+ * Realizuje przeciazenie operatora =
+ * dla liczby zespolonej.
+ */
 LZespolona & LZespolona::operator = (double Skl1){
   this->im = 0;
   this->re = Skl1;
   return *this;
 }
 
+/*
+ * Realizuje przeciazenie operatora +=
+ * dla liczby zespolonej.
+ */
 LZespolona operator += (LZespolona & Skl1, LZespolona Skl2){
   Skl1 = Skl1 + Skl2;
   return Skl1;
