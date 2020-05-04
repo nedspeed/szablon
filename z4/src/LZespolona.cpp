@@ -7,6 +7,15 @@ using std::cin;
 using std::showpos;
 using std::noshowpos;
 
+double abs(LZespolona L){
+  return abs(L.re);
+}
+
+LZespolona operator * (LZespolona Skl1, int Skl2){
+  Skl1.re = Skl1.re * Skl2;
+  Skl1.im = Skl1.im * Skl2;
+  return Skl1;
+}
 /*
  * Realizuje przeciazenie operatora =
  * dla liczby zespolonej.
@@ -163,7 +172,7 @@ LZespolona operator / (LZespolona Skl1, double Skl2)
  *Zwraca:
  *      Referencje do obiektu istream
  */
-istream & operator >> (istream & str, LZespolona & lz){
+std::istream & operator >> (std::istream & str, LZespolona & lz){
     char t[3];
     str >> t[0] >> lz.re >> lz.im >> t[1] >> t[2];
     for (int i=2;((t[0]!='('||t[1]!='i'||t[2]!=')')&&(i>0));i--){
@@ -172,7 +181,6 @@ istream & operator >> (istream & str, LZespolona & lz){
         std::cin.clear();
         std::cin.ignore(INT_MAX,'\n');
         str >> t[0] >> lz.re >> lz.im >> t[1] >> t[2];
-
     }
     return str;
 }
@@ -186,7 +194,7 @@ istream & operator >> (istream & str, LZespolona & lz){
  *Zwraca:
  *      Referencje do obiektu ostream
  */
-ostream & operator << (ostream & str, const LZespolona lz){
+std::ostream & operator << (std::ostream & str, const LZespolona lz){
 
     return str << "(" <<lz.re << std::showpos << lz.im << "i)" << std::noshowpos;
 }

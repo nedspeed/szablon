@@ -1,5 +1,7 @@
 #include "Macierz.hh"
-
+#include <cmath>
+#include <complex>
+#define ERR 0.0000001
 /*
  *  Tutaj nalezy zdefiniowac odpowiednie metody
  *  klasy Macierz<T, Wymiar>, ktore zawieraja wiecej kodu
@@ -36,34 +38,71 @@ template <typename T, int Wymiar>
 
 
 /*
- * Metoda wyliczajaca wyznacznik Macierzy
+ * Metoda wyliczajaca wyznacznik macierzy
  *  za pomoca metody Gaussa-Jordana.
  */
-template <typename T, int Wymiar> 
-  T Macierz<T, Wymiar>::Wyznacznik () {
-    T x;
-    x = 1;
-  for(int i=0;i<ROZMIAR;i++){
-        x = x * this->kol[i][i];
-        for(int j=0;j<ROZMIAR;j++){
-            if(0){
-                this->kol[i][j]=this->kol[i][j]/this->kol[i][i];
+template <typename T, int Wymiar>
+void Macierz<T, Wymiar>::Przekatna(int &z) {
+    //sprawdzenie czy na przekątnej znajduje sie 0
+    for (int i = 0; i < ROZMIAR; i++) {
+        if (abs(kol[i][i])<ERR) { //jesli tak zamiana wierszy
+            for (int j = i; j < ROZMIAR; j++) { //szukamy wiersza z ktorym mozemy zamienic
+                if (abs(kol[j][i])>ERR) {
+                    z = z * -1;
+                    for (int k = 0; k < ROZMIAR; k++) {
+                        swap(kol[i][k], kol[j][k]);
+                    }
+                }
             }
         }
-        for(int k=i+1;k<ROZMIAR;k++){
-            for(int y=i;y<ROZMIAR;y++){
-                this->kol[k][y]=this->kol[k][y]-(this->kol[k][i]*this->kol[i][y]);
-            }           
+    }
+}
+
+/* !
+* Realizuje zerowanie wierszy macierzy metoda eliminacji Gaussa
+*/
+template <typename T, int Wymiar>
+void Macierz<T, Wymiar>::Gauss(T &det) {
+    T s; //zmienna potrzebna przy zerowaniu wierszy
+    for (int j = 0; j < ROZMIAR - 1; j++) { //dla liczenia stalej matrix[i][j]/matrix[j][j]
+        if (abs(kol[j][j])>ERR) { //sprawdzenie aby uniknac dzielenia przez 0
+            for (int i = j + 1; i < ROZMIAR; i++) { //porusza sie po wierszach
+                s = (kol[i][j] / kol[j][j]);
+                for (int k = 0; k < ROZMIAR; k++) { //porusza sie po kolumnach
+                    kol[i][k] = kol[i][k] - kol[j][k] * s;
+                }
+            }
+        } else
+            det = kol[j][j];
+    }
+}
+
+
+/*!
+* Realizuje wyliczenie wyznacznika macierzy
+*/
+template <typename T, int Wymiar>
+T Macierz<T, Wymiar>::Wyznacznik() const {
+    T det;
+    Macierz<T, Wymiar> tmp;
+    tmp = *this;
+    int z = 1; //zmienna potrzebna do zmiany znaku jesli zamienimy wiersze
+    tmp.Przekatna(z); //sprawdzenie czy na przekatnej nie ma zera
+    tmp.Gauss(det); //zerowanie wierszy
+
+
+        for (int i = 0; i < ROZMIAR; i++) {
+            if (i == 0) {
+                det = tmp[i][i];
+            }
+            else {
+                det = det * tmp[i][i];
+            }
         }
-    }
-    T z;
-    z= 1;
-    for(int i=0;i<ROZMIAR;i++){
-        z=z*this->kol[i][i];
-    }
-    T wyzn = x*z;
-    return wyzn;
-  }
+        det = det * z;
+
+        return det;
+}
 
 
 /*

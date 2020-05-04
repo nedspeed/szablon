@@ -44,14 +44,7 @@ template <typename T, int Wymiar>
       Wsp = We;
     }
 
-    template <typename T, int Wymiar>
-      void UkladRownanLiniowych<T, Wymiar>::zmien_kolumne(int i, Wektor<T, Wymiar> We, Macierz<T, Wymiar> W) const
-    {
-    for (int j = 0; j < ROZMIAR; j++)
-    {
-        swap(W[i][j],We[j]);
-    }
-}
+
 /*
  *
  */
@@ -62,9 +55,9 @@ template <typename T, int Wymiar>
         Wektor<T, Wymiar> tmp = kopia.wez_wektor();
         Macierz<T, Wymiar> tm = kopia.wez_macierz();
         for(int i = 0; i < ROZMIAR; i++){
-            kopia.zmien_kolumne(i, tmp, tm);
+            swap(tm[i], tmp);
             Wyzn[i] = tm.Wyznacznik();
-            kopia.zmien_kolumne(i, tmp, tm);
+            swap(tm[i], tmp);
         }
         return Wyzn;
     }
@@ -73,10 +66,14 @@ template <typename T, int Wymiar>
  */
 template <typename T, int Wymiar>
     Wektor<T, Wymiar> UkladRownanLiniowych<T, Wymiar>::RozwUkl() const{
-        UkladRownanLiniowych<T, Wymiar> kopia = *this;
-        Macierz<T, Wymiar> tm = kopia.wez_macierz();
-        T WzG = tm.Wyznacznik();
-        Wektor<T, Wymiar> Wyzn = kopia.WyznKram();
+        UkladRownanLiniowych<T, Wymiar> kopia;
+        kopia = *this;
+        Macierz<T, Wymiar> tm;
+        tm = kopia.wez_macierz();
+        T WzG;
+        WzG = tm.Wyznacznik();
+        Wektor<T, Wymiar> Wyzn;
+        Wyzn = kopia.WyznKram();
         Wektor<T, Wymiar> Rozw;
         for( int i = 0; i < ROZMIAR; i++){
         Rozw[i] = Wyzn[i]/WzG;
@@ -106,8 +103,7 @@ template <typename T, int Wymiar>
   istream& operator >> (istream &Strm, UkladRownanLiniowych<T, Wymiar> &UklRown){
      Wektor<T, Wymiar> Wej;
      Macierz<T, Wymiar> We;
-     Strm >> We;
-     Strm >> Wej;
+     Strm >> We >> Wej;
      UklRown.zmien_wektor(Wej);
      UklRown.zmien_macierz(We);
      return Strm;
@@ -121,19 +117,10 @@ template <typename T, int Wymiar>
          Wyj = UklRown.wez_wektor();
          Macierz<T, Wymiar> Wy;
          Wy = UklRown.wez_macierz();
-         for ( int i = 0; i < ROZMIAR; i++ ){
-            for ( int j = 0; j < ROZMIAR; j++ ){
-
-            Strm << Wy[i][j];
-            Strm << ' ';
-            }
+            Strm << Wy<<' ';
             Strm << endl;
-            }
-            for ( int k = 0; k < ROZMIAR; k++){
-            Strm << Wyj[k];
-            Strm << ' ';
-            }
+            Strm << Wyj<<' ';
             Strm << endl;
             return Strm;
-     }
+  }
      

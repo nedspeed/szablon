@@ -31,7 +31,6 @@ class UkladRownanLiniowych {
   const Macierz<T, Wymiar> wez_macierz() const;
   void zmien_wektor(Wektor<T, Wymiar> Wej);
   void zmien_macierz(Macierz<T, Wymiar> We);
-  void zmien_kolumne(int i, Wektor<T, Wymiar> We, Macierz<T, Wymiar> W) const;
 };
 
 

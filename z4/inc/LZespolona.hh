@@ -28,6 +28,8 @@ LZespolona operator += (LZespolona & Skl1, LZespolona Skl2);
 LZespolona operator + (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona operator - (LZespolona Skl1, LZespolona Skl2);
 LZespolona operator * (LZespolona Skl1, LZespolona Skl2);
+LZespolona operator * (LZespolona Skl1, int Skl2);
+double abs(LZespolona L);
 LZespolona Sprzezenie(LZespolona Skl2);
 double Modul2(LZespolona Skl2);
 LZespolona operator / (LZespolona Skl1, LZespolona Skl2);

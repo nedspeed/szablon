@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "Wektor.hh"
-#include <cmath>
 /*
  *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
  *  i jakie ma glowne cechy.
@@ -23,7 +22,9 @@ class Macierz {
 
   const Wektor<T, Wymiar> & operator[] (int indeks) const; //przeciazenie indeksow dla macierzy typu const
   Wektor<T, Wymiar> & operator[] (int indeks); //przeciazenie indeksow dla macierzy dowolnego typu
-  T Wyznacznik () ; // liczenie wyznacznika Gauss-Jordan
+  void Przekatna(int &z);
+  void Gauss(T &det);
+  T Wyznacznik() const; // liczenie wyznacznika Gauss-Jordan
   Macierz<T, Wymiar> transpozycja() const; // transponowanie macierzy
   Macierz<T, Wymiar> operator + (const Macierz<T, Wymiar> & M) const; // przeciazenie operatora dodawania dwoch macierzy
   Macierz<T, Wymiar> operator - (const Macierz<T, Wymiar> & M) const; // przeciazenie operatora odejmowania dwoch macierzy
